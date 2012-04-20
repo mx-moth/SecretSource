@@ -1,6 +1,9 @@
 (function (window) {
 	"use strict";
 	var _arr = [];
+	var appendChild = "appendChild";
+	var createElement = "createElement";
+	var className = 'className';
 
 	var SecretSource = window.SecretSource = function(els, options) {
 		els = _toArray(els);
@@ -37,35 +40,34 @@
 		if (sibling) {
 			parent.insertBefore(newEl, sibling);
 		} else {
-			parent.appendChild(newEl);
+			parent[appendChild](newEl);
 		}
 	};
 
 	SecretSource.options = {
 		className: 'secret-source',
 		includeTag: false,
-
 		wrap: function(el, src) {
-			var pre = document.createElement('pre');
-			pre.className = this.className;
-
+			var pre = document[createElement]('pre');
+			var code = document[createElement]('code');
 			var type = (el.getAttribute('data-language') || el.getAttribute('type')) || '';
+			pre[className] = this[className];
+
 			if (type) {
 				type = 'language-' + type.replace(/^.*\//, '');
 			}
 
-			var code = document.createElement('code');
-			code.className = type;
+			code[className] = type;
 
-			pre.appendChild(code);
-			code.appendChild(document.createTextNode(src));
+			pre[appendChild](code);
+			code[appendChild](document.createTextNode(src));
 
 			return pre;
 		},
 
 		getSource: function(el) {
-			return el[this.includeTag ? 'outerHTML' : 'innerHTML'];
-		}
+			return el[this[includeTag] ? 'outerHTML' : 'innerHTML'];
+		},
 	};
 
 	SecretSource.show = SecretSource;
