@@ -10,9 +10,14 @@
 		options = _extend({}, SecretSource.options, options);
 
 		return els.map(function(el) {
-			var out = options.wrap(el, options.getSource(el));
+			var source = options.getSource(el);
+			var out = options.wrap(el, source);
 			_insertAfter(out, el);
-			return {element: el, source: el, display: out};
+			return {
+				element: el,
+				source: source,
+				display: out
+			};
 		});
 	};
 
