@@ -1,15 +1,14 @@
-(function (window) {
+(function (window, document) {
 	"use strict";
-	var _arr = [];
 	var appendChild = "appendChild";
 	var createElement = "createElement";
 	var className = 'className';
+	var getAttribute = 'getAttribute';
 
 	var SecretSource = window.SecretSource = function(els, options) {
-		els = _toArray(els);
 		options = _extend({}, SecretSource.options, options);
 
-		return els.map(function(el) {
+		return _toArray(els).map(function(el) {
 			var source = options.getSource(el);
 			var out = options.wrap(el, source);
 			_insertAfter(out, el);
@@ -22,15 +21,13 @@
 	};
 
 	var _toArray = function(arrayish) {
-		return _arr.slice.call(arrayish, 0);
+		return [].slice.call(arrayish);
 	};
 
 	var _extend = function() {
-		var args = _toArray(arguments);
-
-		return args.reduce(function(base, obj) {
+		return _toArray(arguments).reduce(function(base, obj) {
 			for (var k in obj) {
-				if (_arr.hasOwnProperty.call(obj, k)) {
+				if ([].hasOwnProperty.call(obj, k)) {
 					base[k] = obj[k];
 				}
 			}
@@ -55,14 +52,13 @@
 		wrap: function(el, src) {
 			var pre = document[createElement]('pre');
 			var code = document[createElement]('code');
-			var type = (el.getAttribute('data-language') || el.getAttribute('type')) || '';
+			var type = (el[getAttribute]('data-language') || el[getAttribute]('type')) || '';
 			pre[className] = this[className];
 
 			if (type) {
 				type = 'language-' + type.replace(/^.*\//, '');
+				code[className] = type;
 			}
-
-			code[className] = type;
 
 			pre[appendChild](code);
 			code[appendChild](document.createTextNode(src));
@@ -71,9 +67,9 @@
 		},
 
 		getSource: function(el) {
-			return el[this[includeTag] ? 'outerHTML' : 'innerHTML'];
-		},
+			return el[this.includeTag ? 'outerHTML' : 'innerHTML'];
+		}
 	};
 
 	SecretSource.show = SecretSource;
-})(window);
+})(window, document);
