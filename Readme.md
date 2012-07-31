@@ -12,7 +12,7 @@ Usage
 -----
 
 * Include the `secret-source.js` file on your page.
-* Mark any elements on your page that should be printed with 
+* Mark any elements on your page that should be printed with
   `class="secret-source"`
 * Run secret source by invoking it:
 
@@ -26,14 +26,35 @@ Configuring
 Secret Source can be configured with the following options, by including an
 options hash as the second parameter. Available options are:
 
-* **`className`** - Class to apply to the generated `<pre>` element that wraps
+* `className` - Class to apply to the generated `<pre>` element that wraps
 	the code.
-* **`includeTag`** - Whether to include the wrapping element in the printed
+* `includeTag` - Whether to include the wrapping element in the printed
 	source code.
-* **`wrap`** - If the options above are not enough, you can completely control
+* `wrap` - If the options above are not enough, you can completely control
 	the generated element by overriding this function. The function is passed
 	the original element and its source code. It should return an HTML element
 	that will be inserted after the original element in the DOM.
-* **`getSource`** - A function that is used to extract the source code of an
+* `getSource` - A function that is used to extract the source code of an
 	element, which is then passed to `wrap`. Override this if you want to
 	modify the source code before it is displayed.
+
+jQuery
+------
+
+Secret Source does NOT require jQuery. However, if you already have jQuery
+installed, there is `jquery.secretsource.js` for you. It has the same
+`className` and `includeTag` above. Use it like so:
+
+	```javascript
+	jQuery(function($) {
+
+		$('.secret-source').secretSource({
+			className: 'code',
+			includeTag: false,
+		});
+
+	});
+
+`$.secretSource()` returns a new jQuery object containing all of the generated
+`<pre>` blocks. You can then pretty print all of these `<pre>`s using the
+pretty printer of your choice.
