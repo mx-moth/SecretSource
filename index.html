@@ -25,16 +25,16 @@
 
 	<p>Include the Secret Source library:</p>
 
-	<script src="secret-source.js" class="secret-source"></script>
+	<script src="secret-source.js"></script>
 
 	<p> And then use the following snippet (or something similar if you're using
 		a library) to automatically make your script tags visible:
 	</p>
 
-	<script type="text/javascript" class="secret-source">
+	<script type="text/javascript">
 window.addEventListener('DOMContentLoaded', function() {
-	// Display code blocks
-	SecretSource.show(document.querySelectorAll('.secret-source'), {
+	// Display all script and style elements in the body, or things with the 'secret-source' class
+	SecretSource.show(document.querySelectorAll('body script, body style, .secret-source'), {
 		includeTag: true,
 		className: 'secret-source prettyprint'
 	});
@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	<p>This also works on CSS, so you can easily write about that as well:</p>
 
-<style class="secret-source">
+<style>
 div.fancy-box {
 	border: 5px solid red;
 }
