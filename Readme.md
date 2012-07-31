@@ -12,7 +12,7 @@ Usage
 -----
 
 * Include the `secret-source.js` file on your page.
-* Mark any elements on your page that should be printed with 
+* Mark any elements on your page that should be printed with
   `class="secret-source"`
 * Run secret source by invoking it:
 
@@ -37,3 +37,24 @@ options hash as the second parameter. Available options are:
 * `getSource` - A function that is used to extract the source code of an
 	element, which is then passed to `wrap`. Override this if you want to
 	modify the source code before it is displayed.
+
+jQuery
+------
+
+Secret Source does NOT require jQuery. However, if you already have jQuery
+installed, there is `jquery.secretsource.js` for you. It has the same
+`className` and `includeTag` above. Use it like so:
+
+	```javascript
+	jQuery(function($) {
+
+		$('.secret-source').secretSource({
+			className: 'code',
+			includeTag: false,
+		});
+
+	});
+
+`$.secretSource()` returns a new jQuery object containing all of the generated
+`<pre>` blocks. You can then pretty print all of these `<pre>`s using the
+pretty printer of your choice.
