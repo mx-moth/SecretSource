@@ -35,45 +35,46 @@
 	</p>
 
 	<script type="text/javascript">
-jQuery(function($) {
-	$('body script').secretSource({
-		includeTag: true,
-		className: 'prettyprint'
-	});
+		jQuery(function($) {
+			// Include the surrounding tag for <script> elements
+			$('body script').secretSource({
+				includeTag: true,
+				className: 'prettyprint'
+			});
 
-	/// We don't need the wrapper for the first 
-	$('body style, .secret-source').secretSource({
-		className: 'prettyprint'
-	});
+			/// We don't need the surrounding tag for these ones
+			$('body style, .secret-source').secretSource({
+				className: 'prettyprint'
+			});
 
-	// Pretty print them using prettify
-	prettyPrint();
-});
-</script>
+			// Pretty print them using prettify
+			prettyPrint();
+		});
+	</script>
 
 	<p>This also works on CSS, so you can easily write about that as well:</p>
 
-<style>
-div.fancy-box {
-	border: 5px solid red;
-}
-</style>
+	<style>
+		div.fancy-box {
+			border: 5px solid red;
+		}
+	</style>
 
-<div class="secret-source" data-language="html">
-	<p>
-		Infact, this works on ALL elements that you could possibly want to
-		demonstrate, including plain old HTML!
-	</p>
-</div>
+	<div class="secret-source" data-language="html">
+		<p>
+			Infact, this works on ALL elements that you could possibly want to
+			demonstrate, including plain old HTML!
+		</p>
+	</div>
 
-<p>SecretSource does NOT require jQuery. If you do not want to use jQuery, see the
-	<a href="index.html">normal documentation</a>.</p>
+	<p>SecretSource does NOT require jQuery. If you do not want to use jQuery, see the
+		<a href="index.html">normal documentation</a>.</p>
 
-<p>SecretSource is intentionally bare-bones. I have not tried to add every single use case possible to the code,
-	as that would make the code much larger than it needs to be. Instead, consider this as a starting point that
-	you can modify to suit your needs.</p>
+	<p>SecretSource is intentionally bare-bones. I have not tried to add every single use case possible to the code,
+		as that would make the code much larger than it needs to be. Instead, consider this as a starting point that
+		you can modify to suit your needs.</p>
 
-<p>You can find the project <a href="https://github.com/maelstrom/SecretSource/">on GitHub</a>.</p>
+	<p>You can find the project <a href="https://github.com/maelstrom/SecretSource/">on GitHub</a>.</p>
 </div>
 
 </body>
