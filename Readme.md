@@ -37,13 +37,23 @@ options hash as the second parameter. Available options are:
 * `getSource` - A function that is used to extract the source code of an
 	element, which is then passed to `wrap`. Override this if you want to
 	modify the source code before it is displayed.
+* `fixWhitespace` - A function that munges whitespace to fix indentation
+	issues. Say you have a `<div>` that you want to show, buried in your DOM
+	somewhere. It will be indented, as will its contents. The indentation will
+	look stupid on its own, certainly when combined with `fixWhitespace`. This
+	function attempts to fix these issues by stripping out enough whitespace to
+	make first line of code sit flush against the left border, and making all
+	other lines match. If this screws up your formatting, either replace this
+	function with something that does work (and submit a pull request!), or set
+	`fixWhitespace` to `false` to disable it completely.
 
 jQuery
 ------
 
 Secret Source does NOT require jQuery. However, if you already have jQuery
 installed, there is `jquery.secretsource.js` for you. It has the same
-`className` and `includeTag` above. Use it like so:
+`className` and `includeTag` above, and the `fixWhitespace` options can also be
+disable as above. Use it like so:
 
 	```javascript
 	jQuery(function($) {

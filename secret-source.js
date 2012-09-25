@@ -1,3 +1,4 @@
+/*globals Node:false */
 (function (window, document) {
 	"use strict";
 	var appendChild = "appendChild";
@@ -9,8 +10,8 @@
 		options = _extend({}, SecretSource.options, options);
 
 		return _toArray(els).map(function(el) {
-			var source = options.getSource(el);
-			var out = options.wrap(el, source);
+			var source = options.getSource(el, options);
+			var out = options.wrap(el, source, options);
 			_insertAfter(out, el);
 			return {
 				element: el,
@@ -46,10 +47,64 @@
 		}
 	};
 
+	var fixWhitespace = function(el, source, options) {
+		source = fixWhitespace.trim(el, source, options);
+		source = fixWhitespace.fixIndent(el, source, options);
+		return source;
+	};
+	// Strip out empty first or last lines
+	fixWhitespace.trim = function(el, source, options) {
+		return source.replace(/^\s*\n|\n\s*$/g, '');
+	};
+
+	// Munge the source to remove leading indent
+	fixWhitespace.fixIndent = function(el, source, options) {
+		if (options.includeTag) {
+			// Damn. This means we have to find the indent of the tag itself,
+			// which is not an easy task! We have to look at the preceding
+			// element, work out if it is a text node, and then find the amount
+			// of whitespace in the last line of it.
+
+			// We need to examine the parent node. There may not be one, so...
+			var parent = el.parentNode;
+			if (parent === null) {
+				return source;
+			}
+
+			// First off, normalize the text nodes. It makes life easier.
+			parent.normalize();
+
+			// Then, get the previous node. Bail if it is not a text node.
+			var previous = el.previousSibling;
+			if (!previous || previous.nodeType !== Node.TEXT_NODE) {
+				return source;
+			}
+
+			// Work out how much indentation is just before this element
+			var preceding = previous.nodeValue.match(/\n\r?([ \t]+)$/);
+			if (!preceding) {
+				return source;
+			}
+
+			// Strip it out
+			return source.replace(new RegExp('^' + preceding[1], 'mg'), '');
+
+		} else {
+			// Not including the tag makes life so much easier!
+			var leadingSpace = source.match(/^\s+/);
+			if (!leadingSpace) {
+				return source;
+			}
+
+			return source.replace(new RegExp('^' + leadingSpace[0], 'mg'), '');
+		}
+
+	};
 	SecretSource.options = {
 		className: 'secret-source',
 		includeTag: false,
-		wrap: function(el, src) {
+		fixWhitespace: fixWhitespace,
+		wrap: function(el, src, options) {
 			var pre = document[createElement]('pre');
 			var code = document[createElement]('code');
 			var type = (el[getAttribute]('data-language') || el[getAttribute]('type')) || '';
@@ -66,8 +121,12 @@
 			return pre;
 		},
 
-		getSource: function(el) {
-			return el[this.includeTag ? 'outerHTML' : 'innerHTML'];
+		getSource: function(el, options) {
+			var source = el[this.includeTag ? 'outerHTML' : 'innerHTML'];
+			if (options.fixWhitespace) {
+				source = options.fixWhitespace(el, source, options);
+			}
+			return source;
 		}
 	};
 
