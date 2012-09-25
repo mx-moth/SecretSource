@@ -52,45 +52,45 @@ ssc.parentNode.insertBefore(wsc, ssc);
 	</p>
 
 	<script type="text/javascript">
-window.addEventListener('DOMContentLoaded', function() {
-	// Display all script and style elements in the body, or things with the 'secret-source' class
-	SecretSource.show(document.querySelectorAll('body script'), {
-		includeTag: true,
-		className: 'secret-source prettyprint'
-	});
+		window.addEventListener('DOMContentLoaded', function() {
+			// Display all script and style elements in the body, or things with the 'secret-source' class
+			SecretSource.show(document.querySelectorAll('body script'), {
+				includeTag: true,
+				className: 'prettyprint'
+			});
 
-	SecretSource.show(document.querySelectorAll('body style, .secret-source'), {
-		className: 'secret-source prettyprint'
-	});
+			SecretSource.show(document.querySelectorAll('body style, .secret-source'), {
+				className: 'prettyprint'
+			});
 
-	// Pretty print them using prettify
-	prettyPrint();
-});
-</script>
+			// Pretty print them using prettify
+			prettyPrint();
+		});
+	</script>
 
 	<p>This also works on CSS, so you can easily write about that as well:</p>
 
-<style>
-div.fancy-box {
-	border: 5px solid red;
-}
-</style>
+	<style>
+		div.fancy-box {
+			border: 5px solid red;
+		}
+	</style>
 
-<div class="secret-source" data-language="html">
-	<p>
-		Infact, this works on ALL elements that you could possibly want to
-		demonstrate, including plain old HTML!
-	</p>
-</div>
+	<div class="secret-source" data-language="html">
+		<p>
+			Infact, this works on ALL elements that you could possibly want to
+			demonstrate, including plain old HTML!
+		</p>
+	</div>
 
-<p>SecretSource does NOT require jQuery. However, if you already have jQuery on your site, you can use the
-	jQuery plugin of SecretSource. See the <a href="jquery.html">jQuery documentation for more information</a>.</p>
+	<p>SecretSource does NOT require jQuery. However, if you already have jQuery on your site, you can use the
+		jQuery plugin of SecretSource. See the <a href="jquery.html">jQuery documentation for more information</a>.</p>
 
-<p>SecretSource is intentionally bare-bones. I have not tried to add every single use case possible to the code,
-	as that would make the code much larger than it needs to be. Instead, consider this as a starting point that
-	you can modify to suit your needs.</p>
+	<p>SecretSource is intentionally bare-bones. I have not tried to add every single use case possible to the code,
+		as that would make the code much larger than it needs to be. Instead, consider this as a starting point that
+		you can modify to suit your needs.</p>
 
-<p>You can find the project <a href="https://github.com/maelstrom/SecretSource/">on GitHub</a>.</p>
+	<p>You can find the project <a href="https://github.com/maelstrom/SecretSource/">on GitHub</a>.</p>
 </div>
 </body>
 </html>
