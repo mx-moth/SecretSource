@@ -40,7 +40,7 @@ options hash as the second parameter. Available options are:
 * `fixWhitespace` - A function that munges whitespace to fix indentation
 	issues. Say you have a `<div>` that you want to show, buried in your DOM
 	somewhere. It will be indented, as will its contents. The indentation will
-	look stupid on its own, certainly when combined with `fixWhitespace`. This
+	look stupid on its own, certainly when combined with `includeTag`. This
 	function attempts to fix these issues by stripping out enough whitespace to
 	make first line of code sit flush against the left border, and making all
 	other lines match. If this screws up your formatting, either replace this
