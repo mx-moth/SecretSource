@@ -6,6 +6,26 @@
 <link href="style.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
 
+<script type="text/javascript">
+/* This needs to be in the <head>, otherwise it gets printed out! */
+function woopraReady(tracker){
+    tracker.setDomain('maelstrom.github.com');
+    tracker.setIdleTimeout(300000);
+    tracker.addVisitorProperty('project','SecretSource');
+    tracker.track();
+    return false;
+}
+
+(function(){
+var wsc=document.createElement('script');
+wsc.type='text/javascript';
+wsc.src=document.location.protocol+'//static.woopra.com/js/woopra.js';
+wsc.async=true;
+var ssc = document.getElementsByTagName('script')[0];
+ssc.parentNode.insertBefore(wsc, ssc);
+})();
+</script>
+
 </head>
 <body>
 
