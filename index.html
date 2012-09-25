@@ -54,8 +54,12 @@ ssc.parentNode.insertBefore(wsc, ssc);
 	<script type="text/javascript">
 window.addEventListener('DOMContentLoaded', function() {
 	// Display all script and style elements in the body, or things with the 'secret-source' class
-	SecretSource.show(document.querySelectorAll('body script, body style, .secret-source'), {
+	SecretSource.show(document.querySelectorAll('body script'), {
 		includeTag: true,
+		className: 'secret-source prettyprint'
+	});
+
+	SecretSource.show(document.querySelectorAll('body style, .secret-source'), {
 		className: 'secret-source prettyprint'
 	});
 
@@ -88,6 +92,5 @@ div.fancy-box {
 
 <p>You can find the project <a href="https://github.com/maelstrom/SecretSource/">on GitHub</a>.</p>
 </div>
-
 </body>
 </html>
