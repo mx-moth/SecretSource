@@ -16,9 +16,9 @@ Usage
   `class="secret-source"`
 * Run secret source by invoking it:
 
-	```javascript
-	SecretSource(document.querySelectorAll('.secret-source'));
-	```
+```javascript
+SecretSource(document.querySelectorAll('.secret-source'));
+```
 
 Configuring
 -----------
@@ -55,15 +55,16 @@ installed, there is `jquery.secretsource.js` for you. It has the same
 `className` and `includeTag` above, and the `fixWhitespace` options can also be
 disable as above. Use it like so:
 
-	```javascript
-	jQuery(function($) {
+```javascript
+jQuery(function($) {
 
-		$('.secret-source').secretSource({
-			className: 'code',
-			includeTag: false,
-		});
-
+	$('.secret-source').secretSource({
+		className: 'code',
+		includeTag: false,
 	});
+
+});
+```
 
 `$.secretSource()` returns a new jQuery object containing all of the generated
 `<pre>` blocks. You can then pretty print all of these `<pre>`s using the
